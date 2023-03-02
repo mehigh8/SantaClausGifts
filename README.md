@@ -1,10 +1,12 @@
-# Rosu Mihai Cosmin 323CA
+<b>Rosu Mihai Cosmin 323CA</b>
+
+<b>Etapa 1</b>
 
 In cadrul rezolvarii temei, pentru implementarea citirii datelor, am folosit
 modul in care a fost citit input-ul in prima tema. De asemenea, am folosit
 design pattern-uri de strategy, factory, singleton si observer.
 
-Flow-ul simularii:
+<b>Flow-ul simularii:</b>  
 Citirea datelor se poate face in clasa Main sau in clasa Test. Clasa Main va
 trece prin toate testele, iar clasa Test va trece printr-un singur test cu
 numele citit de la tastatura.
@@ -16,7 +18,7 @@ Rezolvarea efectiva a unui test are loc in functia runTest din clasa Main.
   - Dupa aceea, se pregateste un JSONArray pentru output si se apeleaza functia
     simulate din clasa Santa.
 
--simulate:
+- simulate:
   - Simularea incepe prin stergerea de pe lista a copiilor cu varsta de peste
     18 ani, iar pentru cei ramasi este calculat scorul de cumintenie folosind
     o strategie de calcul, care este aleasa de catre factory-ul (care este de
@@ -38,7 +40,7 @@ Rezolvarea efectiva a unui test are loc in functia runTest din clasa Main.
     schimba bugetul lui Mos Craciun, se adauga copiii noi si cadourile noi, si
     se actualizeaza copiii), apoi se reapeleaza functie pentru anul urmator.
 
--OutputMessage:
+- OutputMessage:
   - In cadrul observer-ului se creeaza un JSONObject in care se adauga toate
     detaliile despre copilul de la care a venit notificarea observer-ului.
   - Dupa ce au fost introduse detaliile, JSONObject-ul este adaugat in
@@ -48,46 +50,46 @@ Dupa ce termina de rulat simularea din clasa Santa, JSONArray-ul rezultat este
 adaugat intr-un JSONObject si este afisat sub forma unui String in fisierul de
 output corespunzator testului.
 
-Etapa 2
+<b>Etapa 2</b>
 
 In primul rand, am adaugat campurile necesare claselor care prezentau
 modificari, precum: niceScoreBonus, elf si niceScoreCity clasei Child, quantity
 clasei Gift, cityStrategy clasei Change si elf clasei ChildUpdate.
--niceScoreCity este un hashMap in care cheia este un oras (enum Cities), iar
+- niceScoreCity este un hashMap in care cheia este un oras (enum Cities), iar
 valoarea este scorul de cumintenie mediu al copiilor din acel oras (Double).
 
-Main:
--in clasa Main, singurele modificari sunt cele facute pentru citirea datelor,
+<b>Main:</b>
+- In clasa Main, singurele modificari sunt cele facute pentru citirea datelor,
 care sunt prezente si in clasa Helpers, in functiile folosite la citire.
 
-Santa:
--constructor:
-  -In constructor am adaugat ca strategia de impartire a cadourilor sa fie cea
+<b>Santa:</b>
+- constructor:
+  - In constructor am adaugat ca strategia de impartire a cadourilor sa fie cea
   in functie de id-uri, intrucat se presupune ca in anul 0 copiii sunt sortati
   dupa id-uri.
--simulate:
-  -In primul rand preiau instanta factory-ului de comparatoare folosite pentru
+- simulate:
+  - In primul rand preiau instanta factory-ului de comparatoare folosite pentru
   sortarea copiilor (factory-ul intoarce un comparator nou creat pe baza
   cityStrategy-ului primit ca parametru).
-  -Apoi, inainte sa fie calculat budgetUnit-ul mosului, am sortat copiii dupa
+  - Apoi, inainte sa fie calculat budgetUnit-ul mosului, am sortat copiii dupa
   id, pentru a nu se crea erori de calcul din cauza ordinii copiilor. De
   asemenea, pentru calculul scorului de cumintenie al unui copil se tine cont
   si de niceScoreBonus-ul fiecarui copil, dar i se limiteaza scorul la 10.
-  -Inainte sa sortez copiii, trebuie sa pregatesc hashMap-ul cu scorurile de
+  - Inainte sa sortez copiii, trebuie sa pregatesc hashMap-ul cu scorurile de
   cumintenie ale oraselor (pentru fiecare oras, parcurg copiii, iar pentru cei
   care sunt din orasul respectiv calculez media scorului de cumintenie). Dupa
   ce trec prin toate orasele actualizez hashMap-ul din cadrul fiecarui copil.
-  -Dupa aceea, sortez copiii dupa comparatorul generat de factory pe baza
+  - Dupa aceea, sortez copiii dupa comparatorul generat de factory pe baza
   cityStrategy-ului.
-  -In cadrul impartirii cadourilor, cand se calculeaza bugetul fiecarui copil,
+  - In cadrul impartirii cadourilor, cand se calculeaza bugetul fiecarui copil,
   in functie de elful copilului se modifica bugetul corespunzator.
-  -Cand se cauta cadouri pentru copil, se verifica sa mai existe acel cadou (sa
+  - Cand se cauta cadouri pentru copil, se verifica sa mai existe acel cadou (sa
   aiba o cantitate mai mare ca 0) si dupa ce i se da cadoul copilului,
   cantitatea acestuia este decrementata.
-  -Dupa ce s-a terminat impartirea cadourilor, copiii sunt sortati dupa id
+  - Dupa ce s-a terminat impartirea cadourilor, copiii sunt sortati dupa id
   pentru a incepe impartirea cadourilor facuta de elful yellow. Pentru fiecare
   copil se verifica daca elful lui este yellow si daca nu a primit niciun
   cadou. In acest caz, se cauta cel mai ieftin cadou din categoria preferata
   si, daca este gasit si are o cantitate mai mare ca 0, ii este dat copilului.
-  -In final, cand se aplica annualChange-ul, se aplica si noile modificari
+  - In final, cand se aplica annualChange-ul, se aplica si noile modificari
   adaugate in etapa 2.
